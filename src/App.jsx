@@ -1,8 +1,17 @@
+import { Routes, Route } from 'react-router-dom'
+
 function App() {
   return (
-    <div className="flex items-center justify-center h-screen bg-blue-900">
-      <h1 className="text-white text-4xl font-bold">CampusGig is live 🎓</h1>
-    </div>
+    <Routes>
+      <Route path="/" element={<div>Home</div>} />
+      <Route path="/login" element={<div>Login</div>} />
+      <Route path="/client-signup" element={<div>Client Signup</div>} />
+      <Route path="/artisan-signup" element={<div>Artisan Signup</div>} />
+      <Route path="/artisan-dashboard" element={<div>Artisan Dashboard</div>} />
+      <Route path="/artisan/:id" element={<div>Artisan Profile</div>} />
+      <Route path="/chat/:threadId" element={<div>Chat</div>} />
+      <Route path="/inbox" element={<div>Inbox</div>} />
+    </Routes>
   )
 }
 
