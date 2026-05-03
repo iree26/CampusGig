@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import Login from './pages/login'
+import ClientSignup from './pages/ClientSignup'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Route path="/artisan/:id" element={<div>Artisan Profile</div>} />
       <Route path="/chat/:threadId" element={<div>Chat</div>} />
       <Route path="/inbox" element={<div>Inbox</div>} />
+      <Route path="/client-signup" element={<ClientSignup />} />
     </Routes>
   )
 }
