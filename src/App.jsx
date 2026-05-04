@@ -2,18 +2,50 @@ import { Routes, Route } from 'react-router-dom'
 import Login from './pages/Login'
 import ClientSignup from './pages/ClientSignup'
 import ArtisanSignup from './pages/ArtisanSignup'
+import RoleRedirect from './pages/RoleRedirect'
+import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<div>Home</div>} />
+      {/* Public routes — anyone can visit */}
       <Route path="/login" element={<Login />} />
-      <Route path="/artisan-dashboard" element={<div>Artisan Dashboard</div>} />
-      <Route path="/artisan/:id" element={<div>Artisan Profile</div>} />
-      <Route path="/chat/:threadId" element={<div>Chat</div>} />
-      <Route path="/inbox" element={<div>Inbox</div>} />
       <Route path="/client-signup" element={<ClientSignup />} />
       <Route path="/artisan-signup" element={<ArtisanSignup />} />
+
+      {/* After login, figure out where to send the user */}
+      <Route path="/" element={<RoleRedirect />} />
+
+      {/* Protected — only clients */}
+      <Route path="/home" element={
+        <ProtectedRoute allowedRole="client">
+          <div className="p-8 text-2xl font-bold text-blue-900">Home Screen — coming soon</div>
+        </ProtectedRoute>
+      } />
+
+      {/* Protected — only artisans */}
+      <Route path="/artisan-dashboard" element={
+        <ProtectedRoute allowedRole="artisan">
+          <div className="p-8 text-2xl font-bold text-blue-900">Artisan Dashboard — coming soon</div>
+        </ProtectedRoute>
+      } />
+
+      {/* Protected — both roles */}
+      <Route path="/artisan/:id" element={
+        <ProtectedRoute>
+          <div className="p-8">Artisan Profile — coming soon</div>
+        </ProtectedRoute>
+      } />
+      <Route path="/chat/:threadId" element={
+        <ProtectedRoute>
+          <div className="p-8">Chat — coming soon</div>
+        </ProtectedRoute>
+      } />
+      <Route path="/inbox" element={
+        <ProtectedRoute>
+          <div className="p-8">Inbox — coming soon</div>
+        </ProtectedRoute>
+      } />
     </Routes>
   )
 }
