@@ -38,6 +38,13 @@ function App() {
           <ArtisanDashboard />
         </ProtectedRoute>
       } />
+      
+      <Route path="/edit-profile" element={
+        <ProtectedRoute allowedRole="artisan">
+          <EditProfile />
+        </ProtectedRoute>
+      } />
+
       <Route path="/chat/:threadId" element={
         <ProtectedRoute>
           <div className="p-8">Chat — coming soon</div>
