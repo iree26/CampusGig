@@ -4,6 +4,7 @@ import ClientSignup from './pages/ClientSignup'
 import ArtisanSignup from './pages/ArtisanSignup'
 import RoleRedirect from './pages/RoleRedirect'
 import ProtectedRoute from './components/ProtectedRoute'
+import ArtisanDashboard from './pages/ArtisanDashboard'
 
 function App() {
   return (
@@ -31,9 +32,9 @@ function App() {
       } />
 
       {/* Protected — both roles */}
-      <Route path="/artisan/:id" element={
-        <ProtectedRoute>
-          <div className="p-8">Artisan Profile — coming soon</div>
+      <Route path="/artisan-dashboard" element={
+        <ProtectedRoute allowedRole="artisan">
+          <ArtisanDashboard />
         </ProtectedRoute>
       } />
       <Route path="/chat/:threadId" element={
