@@ -5,6 +5,7 @@ import ArtisanSignup from './pages/ArtisanSignup'
 import RoleRedirect from './pages/RoleRedirect'
 import ProtectedRoute from './components/ProtectedRoute'
 import ArtisanDashboard from './pages/ArtisanDashboard'
+import EditProfile from './pages/EditProfile'
 
 function App() {
   return (
