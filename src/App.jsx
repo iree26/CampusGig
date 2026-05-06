@@ -6,6 +6,7 @@ import RoleRedirect from './pages/RoleRedirect'
 import ProtectedRoute from './components/ProtectedRoute'
 import ArtisanDashboard from './pages/ArtisanDashboard'
 import EditProfile from './pages/EditProfile'
+import Home from './pages/Home'
 
 function App() {
   return (
@@ -22,6 +23,12 @@ function App() {
       <Route path="/home" element={
         <ProtectedRoute allowedRole="client">
           <div className="p-8 text-2xl font-bold text-blue-900">Home Screen — coming soon</div>
+        </ProtectedRoute>
+      } />
+
+      <Route path="/home" element={
+        <ProtectedRoute allowedRole="client">
+          <Home />
         </ProtectedRoute>
       } />
 
