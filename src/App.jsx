@@ -7,6 +7,10 @@ import ProtectedRoute from './components/ProtectedRoute'
 import ArtisanDashboard from './pages/ArtisanDashboard'
 import EditProfile from './pages/EditProfile'
 import Home from './pages/Home'
+import ArtisanProfile from './pages/ArtisanProfile'
+
+
+
 
 function App() {
   return (
@@ -23,6 +27,12 @@ function App() {
       <Route path="/home" element={
         <ProtectedRoute allowedRole="client">
           <div className="p-8 text-2xl font-bold text-blue-900">Home Screen — coming soon</div>
+        </ProtectedRoute>
+      } />
+
+      <Route path="/artisan/:id" element={
+        <ProtectedRoute>
+          <ArtisanProfile />
         </ProtectedRoute>
       } />
 
