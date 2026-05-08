@@ -45,5 +45,3 @@ function ArtisanProfile() {
         }
         fetchData()
       }, [id])
-
-        
