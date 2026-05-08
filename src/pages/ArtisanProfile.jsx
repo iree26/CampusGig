@@ -45,3 +45,41 @@ function ArtisanProfile() {
         }
         fetchData()
       }, [id])
+
+      const renderStars = (rating) => {
+        return Array.from({ length: 5 }, (_, i) => (
+          <span key={i} className={i < Math.round(rating) ? "text-yellow-400" : "text-gray-200"}>
+            ★
+          </span>
+        ))
+      }
+
+      const handleMessage = async () => {
+        navigate(`/chat/${id}`)
+      }
+
+      if (loading) {
+        return (
+          <div className="min-h-screen flex items-center justify-center bg-gray-50">
+            <svg className="animate-spin w-8 h-8 text-blue-900" viewBox="0 0 24 24" fill="none">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
+            </svg>
+          </div>
+        )
+      }
+    
+      if (notFound) {
+        return (
+          <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 gap-3">
+            <span className="text-5xl">🔍</span>
+            <h2 className="font-bold text-gray-900">Artisan not found</h2>
+            <button
+              onClick={() => navigate('/home')}
+              className="text-blue-900 font-semibold text-sm hover:underline"
+            >
+              ← Back to search
+            </button>
+          </div>
+        )
+      }
