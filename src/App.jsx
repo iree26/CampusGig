@@ -8,6 +8,8 @@ import ArtisanDashboard from './pages/ArtisanDashboard'
 import EditProfile from './pages/EditProfile'
 import Home from './pages/Home'
 import ArtisanProfile from './pages/ArtisanProfile'
+import ChatThread from './pages/ChatThread'
+
 
 
 
@@ -35,6 +37,13 @@ function App() {
           <ArtisanProfile />
         </ProtectedRoute>
       } />
+
+      <Route path="/chat/:id" element={
+        <ProtectedRoute>
+          <ChatThread />
+        </ProtectedRoute>
+      } />
+
 
       <Route path="/home" element={
         <ProtectedRoute allowedRole="client">
