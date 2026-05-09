@@ -81,4 +81,46 @@ function ChatThread() {
         bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
       }, [messages])
 
+      const sendMessage = async () => {
+        if (!text.trim() || sending || !chatId) return
+        setSending(true)
+        const messageText = text.trim()
+        setText("")
     
+        try {
+          // Add the message to the subcollection
+          await addDoc(collection(db, 'chats', chatId, 'messages'), {
+            senderUID: currentUser.uid,
+            text: messageText,
+            createdAt: serverTimestamp(),
+          })
+    
+          // Update the thread's last message preview
+          await updateDoc(doc(db, 'chats', chatId), {
+            lastMessage: messageText,
+            lastMessageAt: serverTimestamp(),
+          })
+        } catch (err) {
+          console.error("Failed to send message", err)
+          setText(messageText)
+        }
+        setSending(false)
+      }
+    
+      const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault()
+          sendMessage()
+        }
+      }
+
+      if (loading) {
+        return (
+          <div className="min-h-screen flex items-center justify-center bg-gray-50">
+            <svg className="animate-spin w-8 h-8 text-blue-900" viewBox="0 0 24 24" fill="none">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
+            </svg>
+          </div>
+        )
+      }
