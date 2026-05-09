@@ -59,3 +59,26 @@ function ChatThread() {
     
         setup()
       }, [currentUser, id])
+
+      useEffect(() => {
+        if (!chatId) return
+    
+        const messagesRef = collection(db, 'chats', chatId, 'messages')
+        const q = query(messagesRef, orderBy('createdAt', 'asc'))
+    
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+          const msgs = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+          }))
+          setMessages(msgs)
+        })
+    
+        return () => unsubscribe()
+      }, [chatId])
+
+      useEffect(() => {
+        bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+      }, [messages])
+
+    
